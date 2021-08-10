@@ -1,5 +1,6 @@
 from flask import Flask
 #从flask包中导入Flask类
+from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
@@ -7,6 +8,11 @@ from config import Config
 
 app = Flask(__name__)#将Flask类的实例 赋值给名为 app 的变量。这个实例成为app包的成员。
 app.config.from_object(Config)
+
+
+login = LoginManager(app)
+login.login_view='login'
+#指定登录视图
 
 db = SQLAlchemy(app)#数据库对象
 migrate = Migrate(app, db)#迁移引擎对象
